@@ -1,2 +1,2 @@
-include ':app', ':mylib'
+include ':app', ':mylib', ':vectordrawable'
 include ':android '
