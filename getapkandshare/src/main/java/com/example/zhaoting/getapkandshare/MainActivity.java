@@ -12,6 +12,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -50,29 +51,31 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ApkHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this,String.valueOf(position),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
             }
         });
 
         //获取手机中已经安装的应用
         //b.判断(applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)的值，该值大于0时，表示获取的应用为系统预装的应用，反之则为手动安装的应用
-//        final List<PackageInfo> packageInfoList = this.getPackageManager().getInstalledPackages(0);
-        final List<ResolveInfo> list = getResolveInfo(this.getPackageManager());
+        final List<PackageInfo> list = this.getPackageManager().getInstalledPackages(PackageManager.GET_ACTIVITIES);
+        final List<ApplicationInfo> list1 = this.getPackageManager().getInstalledApplications(PackageManager.GET_ACTIVITIES);
+        final List<ResolveInfo> list2 = getResolveInfo(this.getPackageManager());
         new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < list.size(); i++) {
                     Bean bean = new Bean();
-                    bean.setName((String) list.get(i).loadLabel(MainActivity.this.getPackageManager()));
-                    bean.setIcon(list.get(i).loadIcon(MainActivity.this.getPackageManager()));
-                    mList.add(bean);
-//                    ApplicationInfo info = getApplicationInfo(packageInfoList.get(i));
+//                    bean.setName((String) list.get(i).loadLabel(MainActivity.this.getPackageManager()));
+//                    bean.setIcon(list.get(i).loadIcon(MainActivity.this.getPackageManager()));
+//                    mList.add(bean);
+                    ApplicationInfo info = getApplicationInfo(list.get(i));
 //                    if ((info.flags & ApplicationInfo.FLAG_SYSTEM) <= 0) {
-//                        bean.setIcon(getIcon(info, MainActivity.this.getPackageManager()));
-//                        bean.setName(getLabel(info, MainActivity.this.getPackageManager()));
-//                        bean.setSize(getApkSize(info));
-//                        bean.setTime(getLastUpdateTime(packageInfoList.get(i)));
-//                        mList.add(bean);
+                    bean.setIcon(getIcon(info, MainActivity.this.getPackageManager()));
+                    Log.i("tag", getLabel(info, MainActivity.this.getPackageManager()));
+                    bean.setName(getLabel(info, MainActivity.this.getPackageManager()));
+                    bean.setSize(getApkSize(info));
+                    bean.setTime(getLastUpdateTime(list.get(i)));
+                    mList.add(bean);
 //                    }
                 }
                 mHandler.sendEmptyMessage(0);

@@ -1,2 +1,2 @@
-include ':app', ':mylib', ':vectordrawable', ':getapkandshare'
+include ':app', ':mylib', ':vectordrawable', ':getapkandshare', ':cardglidemine', ':viewdraghelper', 'cardGlide'
 include ':android '

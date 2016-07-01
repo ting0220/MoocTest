@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.zhaoting.viewdraghelper.DragLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/id_drag"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="#0ff"
+        android:clickable="true"
+        android:text="Hello World!"/>
+
+    <TextView
+        android:id="@+id/id_auto_back"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="#f0f"
+        android:clickable="true"
+        android:text="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/id_edge_tracker"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="#ff0"
+        android:clickable="true"
+        android:text="tusgdbsidvowehvnv"/>
+</com.example.zhaoting.viewdraghelper.DragLayout>
